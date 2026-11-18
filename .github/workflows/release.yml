@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    env:
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - run: dotnet test tests/AZcaptcha.Sdk.Tests/AZcaptcha.Sdk.Tests.csproj
+      - run: dotnet pack src/AZcaptcha.Sdk/AZcaptcha.Sdk.csproj -c Release -o packages
+      - name: Push to NuGet
+        if: env.NUGET_API_KEY != ''
+        run: dotnet nuget push "packages/*.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json --skip-duplicate

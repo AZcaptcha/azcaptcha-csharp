@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - run: dotnet test tests/AZcaptcha.Sdk.Tests/AZcaptcha.Sdk.Tests.csproj
+      - run: dotnet pack src/AZcaptcha.Sdk/AZcaptcha.Sdk.csproj -c Release

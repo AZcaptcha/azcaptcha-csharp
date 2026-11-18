@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net8.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <PackageId>AZcaptcha.Sdk</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>AZcaptcha</Authors>
+    <Company>AZcaptcha</Company>
+    <Description>Official AZcaptcha SDK — reCAPTCHA, hCaptcha, Turnstile and image captchas</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://azcaptcha.com/lang/csharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/AZcaptcha/azcaptcha-csharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>captcha;recaptcha;hcaptcha;turnstile;azcaptcha;2captcha</PackageTags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+  </ItemGroup>
+
+</Project>
